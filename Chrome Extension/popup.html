@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Select the download options</title>
+    <style>
+      body {
+        min-width: 357px;
+        overflow-x: hidden;
+		background-color:white;
+      }
+    </style>
+
+    <!--
+      - JavaScript and HTML must be in separate files: see our Content Security
+      - Policy documentation[1] for details and explanation.
+      -
+      - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
+     -->
+	 <script src="jquery.min.js"></script> 
+	 <script src="grid.js"></script> 
+      <link rel="stylesheet" href="grid.css">
+	   <script type="text/javascript" src="jszip.js"></script>
+
+    <script src="background.js"></script> 
+
+  </head>
+
+  <body>
+  Select the files you would like to download:
+ <div id="example" style="width:500px;overflow:scroll">
+  </div>
+
+  <input type="button" value="Download" name="btnDownload" id="btnDownload"/>
+<a id="option" href="#">Options</>
+  </body>
+</html>
+
