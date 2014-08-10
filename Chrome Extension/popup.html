@@ -7,6 +7,9 @@
         min-width: 357px;
         overflow-x: hidden;
 		background-color:white;
+		font-family:Verdana, Helvetica, Arial, FreeSans, sans-serif;
+		font-size:12px;
+		font-color:black;
       }
     </style>
 
@@ -26,12 +29,17 @@
   </head>
 
   <body>
-  Select the files you would like to download:
- <div id="example" style="width:500px;overflow:scroll">
+  <p class="hideme">Select the files you would like to download:</p>
+ <div id="example" style="width:750px;overflow:scroll;" class="hideme">
   </div>
+<br/>
+  <input type="button" value="Download" name="btnDownload" id="btnDownload" class="hideme"/>
+<a id="option" href="#" class="hideme">Options</a>
 
-  <input type="button" value="Download" name="btnDownload" id="btnDownload"/>
-<a id="option" href="#">Options</>
+<div id="message" style="display:none">
+<p>There is no downloadable file in this webpage.</p>
+</div>
+<input type="hidden" id="hdnFlag" name="hdnFlag" value="none" />
   </body>
 </html>
 

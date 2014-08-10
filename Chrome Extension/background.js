@@ -2,9 +2,8 @@ var allLinks = [];
 var visibleLinks = [];
 var zip = new JSZip();
 var data1=[];
- /*allLinks = [
-  ["", "Link Title", "Link Path"]
-];*/
+var FolderName ='SonicDownload_'+new Date().toLocaleDateString().replace('/','_').replace('/','_');
+var TitleName='';
 
  $(function(){
  $("#divOptions").append('Loading....');
@@ -27,6 +26,10 @@ var data1=[];
 
 chrome.extension.onMessage.addListener(function(data){
 $("#divOptions").text("");
+if(data.length <= 0){
+$(".hideme").hide();
+$("#message").show();
+}
 for (var i = 0; i < data.length; i++) {
  //$("#divOptions").append(data);
  //$("#divOptions").append('<br/>');
@@ -45,9 +48,9 @@ allLinks.push(data[i].link);
 //$("#example").text(visibleLinks);
  $('#example').handsontable({
   data: data1,
-  minSpareRows: 1,
-  colHeaders: ["Select","Name","Path"],
-  contextMenu: true,
+  minSpareRows: 0,
+  contextMenu:false,
+  colHeaders: ["<input type='checkbox' id='check'/><b>Select</b>","<b>File Path</b>","<b>Name</b> <i> if present</i>"],
   columns:[
   {type:"checkbox",readOnly:false},
   {data:2,readOnly:true},
@@ -72,8 +75,8 @@ $(document).ready(chrome.windows.getCurrent(function (currentWindow) {
 $("#example").find("input:checkbox").each(function(index){
 
 if($(this).is(':checked') == true){
-console.log(index);
-chrome.downloads.download({url:data1[index][2]})
+var titleName = data1[index][2];
+chrome.downloads.download({url:titleName,filename:FolderName+"/"+titleName.substring(titleName.lastIndexOf('/') + 1),saveAs:false})
 
 
 }
@@ -88,5 +91,17 @@ chrome.downloads.download({url:data1[index][2]})
   $(document).ready(function(){
   $('#option').click(function () {
     chrome.tabs.create({ url: 'options.html'});
-  });});
-
+  });
+  });
+    $(document).ready(function(){
+  $('#check').click(function () {
+  if($('#hdnFlag').val() == 'all')
+  {
+$("#example").find("input:checkbox").prop('checked', false); 
+$('#hdnFlag').val('none')}
+else{
+$("#example").find("input:checkbox").prop('checked', "checked");
+$('#hdnFlag').val('all');
+}
+});
+  });
