@@ -8,7 +8,7 @@
     "page": "popup.html"
   },
   "permissions": [
-        "tabs", "<all_urls>","downloads"
+        "tabs", "<all_urls>","downloads","storage"
     ],
   "browser_action": {
     "default_icon": "icon.png",
