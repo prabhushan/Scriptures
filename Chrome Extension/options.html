@@ -108,7 +108,7 @@
     padding-left: 55px;
   }
   .closeBtn {
-    margin: 20px 0 0 0;
+    margin: 2px 0px 0px 56px;
   }
   #footer {
     text-align: center;
@@ -139,35 +139,57 @@
     display: none;
   }
   </style>
+    <script src="jquery.min.js"></script> 
+	    <script src="options.js"></script> 
+
  </head>
 <body>
   <div class="contentBox">
-    <div id="header">
-     <h1 id="optionTitle"></h1>
-    </div>
-    <h4 id="screenshootQualitySetting"></h4>
+ 
+    <h4 id="screenshootQualitySetting">Save option of the Files</h4>
     <div class="section-content">
      <div>
-       <input id="lossy" type="radio" name="idSetting"><label>Settings in Google Chrome (Default)</label><span id="lossyScreenShot"></span></label>
+       <input id="lossy" type="radio" name="idSetting"><label>Always Save Files in the Default Location set in Google Chrome (Default)</label><span id="lossyScreenShot"></span></label>
        <br/><input id="lossless" type="radio" name="idSetting"/><span id="losslessScreenShot">
-       </span><label>Always Save Files in the Default Location</label> </div>
+       </span><label>Prompt for each file I wish to download</label> </div>
      <div class="clear"></div>
-    </div>
+    </div> 
     <div id="shortcutSettingDiv" style="margin: 0px 0px 5px 0px">
       <h4 id="shorcutSetting">Extensions of the Files</h4>
-      <div style="margin: 2px 0px 0px 56px">
-         <input type="checkbox" id="settingShortcut">
-         <label for="settingShortcut" id="settingShortcutText"></label>
+      <div id = "divOptions" style="margin: 2px 0px 0px 56px">
+       <!--  <input type="checkbox" id="settingShortcut" value="jpg" />
+         <label for="settingShortcut" id="settingShortcutText">jpg</label>
+		 <br/>
+		  <input type="checkbox" id="settingShortcut" value="pdf" />
+         <label for="settingShortcut" id="settingShortcutText">pdf</label>
+		 		 <br/>
+		  <input type="checkbox" id="settingShortcut" value="docx" />
+         <label for="settingShortcut" id="settingShortcutText">docx</label>
+		 		 <br/>
+		  <input type="checkbox" id="settingShortcut" value="zip" />
+         <label for="settingShortcut" id="settingShortcutText">zip</label>
+		 		 <br/>
+		  <input type="checkbox" id="settingShortcut" value="xls" />
+         <label for="settingShortcut" id="settingShortcutText">xls</label>
+		 		 <br/>
+		  <input type="checkbox" id="settingShortcut" value="xlsx" />
+         <label for="settingShortcut" id="settingShortcutText">xlsx</label>
+		 		 <br/>
+		  <input type="checkbox" id="settingShortcut" value="mp3" />
+         <label for="settingShortcut" id="settingShortcutText">mp3</label>
+		 		 <br/>
+		  <input type="checkbox" id="settingShortcut" value="mp4" />
+         <label for="settingShortcut" id="settingShortcutText">mp4</label>
+		 		 <br/>-->
+	<div id="dynExtn">
+	 <input type='text' id="txtExtn" name="txtExtn" />
+	 <button id="addExtn">Add</button>
+	 </div>
       </div>
-      <div id="hot-key-setting">
-        <span class="hot-key">
-          <label for="area-capture-hot-key" class="capture-text" id="area-capture-text"></label>
-          <span>Ctrl+Alt+<select id="area-capture-hot-key"></select></span>
-        </span>
-      </div>
-      <div id="error-info"></div>
+
+      <div class="closeBtn" id="message-info"></div>
     </div>
-    <div class="closeBtn"><button id="saveAndClose"></button>
+    <div class="closeBtn"><button id="saveAndClose"> Save the setting</button>
     </div>
   </div>
   <div id="footer">&copy;2010 Google</div>

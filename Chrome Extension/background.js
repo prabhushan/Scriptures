@@ -89,11 +89,7 @@ chrome.downloads.download({url:titleName,filename:FolderName+"/"+titleName.subst
  }
   );
   $(document).ready(function(){
-  chrome.storage.sync.set({'value': 12}, function() {
-    chrome.storage.sync.get("value", function(data) {
-      console.log("data", data);
-    });
-  });
+  
   $('#option').click(function () {
     chrome.tabs.create({ url: 'options.html'});
   });
