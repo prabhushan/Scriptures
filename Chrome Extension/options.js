@@ -1,11 +1,14 @@
 var arrOptions = [];// this is to load the Check box values
 var defaultOptions = []; // this is to load the check box options
+var fileOption;
   $(document).ready(function(){
 		$('#saveAndClose').click(function(){
 			fnDecodeExtn();
 			
 	chrome.storage.sync.set({'extnOptns': arrOptions} );
   	chrome.storage.sync.set({'extnOptnsChecks': defaultOptions},fnDisplayMessage());
+	chrome.storage.local.set({'fileOption':fileOption});
+
 
 			});
 		});
@@ -17,7 +20,7 @@ var defaultOptions = []; // this is to load the check box options
 
 		}
 			else{
-			$( " <input type='checkbox' id='settingShortcut' value='"+$('#txtExtn').val()+"' /><label for='settingShortcut' id='settingShortcutText'>"+$('#txtExtn').val()+"</label><br/>" ).prependTo( "#dynExtn" );
+			$( " <input type='checkbox' id='"+$('#txtExtn').val()+"' value='"+$('#txtExtn').val()+"' /><label for='settingShortcut' id='settingShortcutText'>"+$('#txtExtn').val()+"</label><br/>" ).prependTo( "#dynExtn" );
 			defaultOptions.push($('#txtExtn').val());
 			
 			$('#txtExtn').val('');
@@ -56,20 +59,28 @@ chrome.storage.local.get('SavedData',function(data){
 if(data.SavedData != 'true')
 {
 // This is time when user did not save anything in the options.
-arrOptions = [];
+fileOption = 'false';
+arrOptions = ['jpg','pdf','docx','zip','xls','xlsx','mp3','mp4'];
 defaultOptions = ['jpg','pdf','docx','zip','xls','xlsx','mp3','mp4'];
+fnLoadOptions();
 }
 else{
 chrome.storage.sync.get('extnOptns',function(data){arrOptions = data.extnOptns;})
-chrome.storage.sync.get('extnOptnsChecks',function(data){defaultOptions = data.extnOptnsChecks;})
+chrome.storage.sync.get('extnOptnsChecks',function(data){defaultOptions = data.extnOptnsChecks;fnLoadOptions();})
+chrome.storage.sync.get('fileOption',function(data){fileOption = data.fileOption;})
+
 }
-fnLoadOptions();
+
 })
 });
 
 function fnLoadOptions(){
 for(var i=0;i<defaultOptions.length;i++){
-$( " <input type='checkbox' id='settingShortcut' value='"+defaultOptions[i]+"' /><label for='settingShortcut' id='settingShortcutText'>"+defaultOptions[i]+"</label><br/>" ).prependTo( "#divOptions" );
+$( " <input type='checkbox' id='"+defaultOptions[i]+"' value='"+defaultOptions[i]+"' /><label for='settingShortcut' id='settingShortcutText'>"+defaultOptions[i]+"</label><br/>" ).prependTo( "#divOptions" );
 
 }
+for (var i in arrOptions) {
+$(":checkbox[value='"+arrOptions[i]+"']").prop("checked","true");
+}
+
 }

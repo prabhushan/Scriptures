@@ -2,7 +2,7 @@ var allLinks = [];
 var visibleLinks = [];
 var zip = new JSZip();
 var data1=[];
-var FolderName ='SonicDownload_'+new Date().toLocaleDateString().replace('/','_').replace('/','_');
+var FolderName ='SonicDownload/'+new Date().toLocaleDateString().replace('/','_').replace('/','_');
 var TitleName='';
 
  $(function(){
