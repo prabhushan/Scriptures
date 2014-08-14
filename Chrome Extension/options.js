@@ -7,7 +7,7 @@ var fileOption;
 			
 	chrome.storage.sync.set({'extnOptns': arrOptions} );
   	chrome.storage.sync.set({'extnOptnsChecks': defaultOptions},fnDisplayMessage());
-	chrome.storage.local.set({'fileOption':fileOption});
+	chrome.storage.sync.set({'fileOption':fileOption});
 
 
 			});
@@ -38,12 +38,13 @@ $('#shortcutSettingDiv').find("input:checkbox").each(function(index){
 if($(this).is(':checked') == true){
 arrOptions.push($(this).val());
 }
-})
+});
+fileOption = $('#divFile').find(':radio:checked').val();
 }
 
 function fnDisplayMessage(){
 $('#message-info').text('Setting Saved Successfully!!');
-chrome.storage.local.set({SavedData:'true'});
+chrome.storage.sync.set({SavedData:'true'});
 
 }
 
@@ -55,7 +56,7 @@ If Not Saved, load default options
 If Saved, load options saved by End user
 **/
 
-chrome.storage.local.get('SavedData',function(data){
+chrome.storage.sync.get('SavedData',function(data){
 if(data.SavedData != 'true')
 {
 // This is time when user did not save anything in the options.
@@ -66,8 +67,8 @@ fnLoadOptions();
 }
 else{
 chrome.storage.sync.get('extnOptns',function(data){arrOptions = data.extnOptns;})
-chrome.storage.sync.get('extnOptnsChecks',function(data){defaultOptions = data.extnOptnsChecks;fnLoadOptions();})
 chrome.storage.sync.get('fileOption',function(data){fileOption = data.fileOption;})
+chrome.storage.sync.get('extnOptnsChecks',function(data){defaultOptions = data.extnOptnsChecks;fnLoadOptions();})
 
 }
 
@@ -82,5 +83,6 @@ $( " <input type='checkbox' id='"+defaultOptions[i]+"' value='"+defaultOptions[i
 for (var i in arrOptions) {
 $(":checkbox[value='"+arrOptions[i]+"']").prop("checked","true");
 }
+$('#divFile').find(':radio[value='+fileOption+']').prop('checked','true')
 
 }
