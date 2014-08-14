@@ -7,11 +7,16 @@
   "background": {
     "page": "popup.html"
   },
+  "icons": {
+	"16":"sonicdownload.png", 
+    "48":"sonicdownload.png",
+    "128": "sonicdownload.png"
+  },
   "permissions": [
         "tabs", "<all_urls>","downloads","storage"
     ],
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": "sonicdownload.png",
     "default_popup": "popup.html"
   },
   "content_scripts":[{
