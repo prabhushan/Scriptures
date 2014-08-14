@@ -4,6 +4,9 @@ var zip = new JSZip();
 var data1=[];
 var FolderName ='SonicDownload/'+new Date().toLocaleDateString().replace('/','_').replace('/','_');
 var TitleName='';
+var arrOptions = [];// this is to load the Check box values
+var defaultOptions = []; // this is to load the check box options
+var fileOption;
 
  $(function(){
  $("#divOptions").append('Loading....');
@@ -94,15 +97,27 @@ chrome.downloads.download({url:titleName,filename:FolderName+"/"+titleName.subst
     chrome.tabs.create({ url: 'options.html'});
   });
   });
-    $(document).ready(function(){
-  $('#check').click(function () {
-  if($('#hdnFlag').val() == 'all')
-  {
-$("#example").find("input:checkbox").prop('checked', false); 
-$('#hdnFlag').val('none')}
-else{
-$("#example").find("input:checkbox").prop('checked', "checked");
-$('#hdnFlag').val('all');
+  
+  $(document).ready(function(){
+/**
+Check whether already saved
+If Not Saved, load default options
+
+If Saved, load options saved by End user
+**/
+
+chrome.storage.sync.get('SavedData',function(data){
+if(data.SavedData != 'true')
+{
+// This is time when user did not save anything in the options.
+fileOption = 'false';
+arrOptions = ['jpg','pdf','docx','zip','xls','xlsx','mp3','mp4'];
+
+chrome.storage.sync.set({'extnOptns':arrOptions});
+chrome.storage.sync.set({'fileOption':fileOption});
+
+
 }
+
+})
 });
-  });

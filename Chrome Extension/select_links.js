@@ -1,14 +1,25 @@
 var links = new Array();
-
-debugger;
- chrome.storage.sync.get("value", function(data) {
-      console.log("data", data);
+var extnOptions = '';
+ chrome.storage.sync.get("extnOptns", function(data) {
+ extnOptions = 'a';
+      for(var a in data.extnOptns){
+	  extnOptions = extnOptions+"[href*='."+data.extnOptns[a]+"']"+",";
+	  
+	  }
+	 extnOptions= extnOptions.substring(0,extnOptions.length-1);
+	 displayLinks();
     });
-$("a[href*='.jpg'],[download],[href*='.pdf'],[href*='.docx'],[href*='.zip'],[href*='.xls'],[href*='.xlsx'],[href*='.mp3'],[href*='.mp4']").each(function(index){
+	
+	function displayLinks(){
+	$(extnOptions).each(function(index){
 
-links.push({link:this.href,name:this.title});
+links.push({link:this.href,name:this.title + $(this).text()});
 }
 
 )
 chrome.runtime.sendMessage(links);
+	}
+
+
+//"a[href*='.jpg'],[download],[href*='.pdf'],[href*='.docx'],[href*='.zip'],[href*='.xls'],[href*='.xlsx'],[href*='.mp3'],[href*='.mp4']"
 
