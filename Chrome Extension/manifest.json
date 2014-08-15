@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "Sai Ram - First app",
+  "name": "Sonic Downloader",
   "description": "This extension demonstrates a browser action power of GRIT.",
   "version": "1.0",
   "background": {
