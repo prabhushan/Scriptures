@@ -7,6 +7,7 @@ var TitleName='';
 var arrOptions = [];// this is to load the Check box values
 var defaultOptions = []; // this is to load the check box options
 var fileOption;
+chrome.storage.sync.get('fileOption',function(data){fileOption = data.fileOption;});
 
  $(function(){
  $("#divOptions").append('Loading....');
@@ -79,7 +80,7 @@ $("#example").find("input:checkbox").each(function(index){
 
 if($(this).is(':checked') == true){
 var titleName = data1[index][2];
-chrome.downloads.download({url:titleName,filename:FolderName+"/"+titleName.substring(titleName.lastIndexOf('/') + 1),saveAs:false})
+chrome.downloads.download({url:titleName,filename:FolderName+"/"+titleName.substring(titleName.lastIndexOf('/') + 1),saveAs:Boolean(fileOption)})
 
 
 }
