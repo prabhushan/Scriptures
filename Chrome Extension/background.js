@@ -54,7 +54,7 @@ allLinks.push(data[i].link);
   data: data1,
   minSpareRows: 0,
   contextMenu:false,
-  colHeaders: ["<input type='checkbox' id='check'/><b>Select</b>","<b>File Path</b>","<b>Name</b> <i> if present</i>"],
+  colHeaders: ["<b>Select</b>","<b>File Path</b>","<b>Name</b> <i> if present</i>"],
   columns:[
   {type:"checkbox",readOnly:false},
   {data:2,readOnly:true},
@@ -63,6 +63,7 @@ allLinks.push(data[i].link);
   ]
 });
 });
+
 
 $(document).ready(chrome.windows.getCurrent(function (currentWindow) {
    chrome.tabs.query({active: true, windowId: currentWindow.id},
@@ -91,6 +92,7 @@ chrome.downloads.download({url:titleName,filename:FolderName+"/"+titleName.subst
  }
  )
  }
+
   );
   $(document).ready(function(){
   
@@ -122,3 +124,6 @@ chrome.storage.sync.set({'fileOption':fileOption});
 
 })
 });
+
+
+
