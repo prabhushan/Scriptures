@@ -2,7 +2,7 @@ var allLinks = [];
 var visibleLinks = [];
 var zip = new JSZip();
 var data1=[];
-var FolderName ='SonicDownload/'+new Date().toLocaleDateString().replace('/','_').replace('/','_');
+var FolderName ='HyperDownloader/'+new Date().toLocaleDateString().replace('/','_').replace('/','_');
 var TitleName='';
 var arrOptions = [];// this is to load the Check box values
 var defaultOptions = []; // this is to load the check box options
@@ -81,7 +81,7 @@ $("#example").find("input:checkbox").each(function(index){
 
 if($(this).is(':checked') == true){
 var titleName = data1[index][2];
-chrome.downloads.download({url:titleName,filename:FolderName+"/"+titleName.substring(titleName.lastIndexOf('/') + 1),saveAs:Boolean(fileOption)})
+chrome.downloads.download({url:titleName,filename:FolderName+"/"+titleName.substring(titleName.lastIndexOf('/') + 1),saveAs:Boolean(parseInt(fileOption))})
 
 
 }
@@ -113,7 +113,7 @@ chrome.storage.sync.get('SavedData',function(data){
 if(data.SavedData != 'true')
 {
 // This is time when user did not save anything in the options.
-fileOption = 'false';
+fileOption = 1;
 arrOptions = ['jpg','pdf','docx','zip','xls','xlsx','mp3','mp4'];
 
 chrome.storage.sync.set({'extnOptns':arrOptions});
