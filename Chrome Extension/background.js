@@ -20,6 +20,7 @@ chrome.storage.sync.get('fileOption',function(data){fileOption = data.fileOption
  
  function loadFileName(titleName){
  titleName = titleName.substring(titleName.lastIndexOf('/') + 1);
+ if(titleName.lastIndexOf('?') > 0)
  titleName = titleName.substring(0,titleName.lastIndexOf('?'));
  return titleName;
  }
