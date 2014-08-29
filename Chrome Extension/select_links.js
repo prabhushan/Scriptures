@@ -1,5 +1,6 @@
 var links = new Array();
 var extnOptions = '';
+console.log('selection_links');
  chrome.storage.sync.get("extnOptns", function(data) {
  extnOptions = 'a';
       for(var a in data.extnOptns){
@@ -7,6 +8,7 @@ var extnOptions = '';
 	  
 	  }
 	 extnOptions= extnOptions.substring(0,extnOptions.length-1);
+//	 console.log(extnOptions);
 	 displayLinks();
     });
 	

@@ -2,6 +2,7 @@ var allLinks = [];
 var visibleLinks = [];
 var zip = new JSZip();
 var data1=[];
+var dataFrame=[];
 var FolderName ='HyperDownloader/'+new Date().toLocaleDateString().replace('/','_').replace('/','_');
 var TitleName='';
 var arrOptions = [];// this is to load the Check box values
@@ -17,6 +18,12 @@ chrome.storage.sync.get('fileOption',function(data){fileOption = data.fileOption
 
  });
  
+ function loadFileName(titleName){
+ titleName = titleName.substring(titleName.lastIndexOf('/') + 1);
+ titleName = titleName.substring(0,titleName.lastIndexOf('?'));
+ return titleName;
+ }
+ 
  /*chrome.extension.onRequest.addListener(function(links) {
   for (var index in links) {
     allLinks.push(links[index]);
@@ -29,11 +36,19 @@ chrome.storage.sync.get('fileOption',function(data){fileOption = data.fileOption
 });*/
 
 chrome.extension.onMessage.addListener(function(data){
+dataFrame = dataFrame.concat(data)
+data = dataFrame;
+//console.log('onMessage.addListener' + data);
+
 $("#divOptions").text("");
 if(data.length <= 0){
+//console.log('onMessage.addListener Inside IF');
+
 $(".hideme").hide();
 $("#message").show();
 }
+
+//console.log('data.length' + data.length);
 for (var i = 0; i < data.length; i++) {
  //$("#divOptions").append(data);
  //$("#divOptions").append('<br/>');
@@ -66,6 +81,8 @@ allLinks.push(data[i].link);
 
 
 $(document).ready(chrome.windows.getCurrent(function (currentWindow) {
+//console.log('document.ready');
+
    chrome.tabs.query({active: true, windowId: currentWindow.id},
                       function(activeTabs) { chrome.tabs.executeScript(activeTabs[0].id, {file: 'jquery.min.js', allFrames: true}),
       chrome.tabs.executeScript(
@@ -81,7 +98,7 @@ $("#example").find("input:checkbox").each(function(index){
 
 if($(this).is(':checked') == true){
 var titleName = data1[index][2];
-chrome.downloads.download({url:titleName,filename:FolderName+"/"+titleName.substring(titleName.lastIndexOf('/') + 1),saveAs:Boolean(parseInt(fileOption))})
+chrome.downloads.download({url:titleName,filename:FolderName+"/"+loadFileName(titleName),saveAs:Boolean(parseInt(fileOption))})
 
 
 }
